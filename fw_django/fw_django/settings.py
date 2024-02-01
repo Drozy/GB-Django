@@ -59,12 +59,12 @@ LOGGING = {
             'handlers': ['console', 'file'],
             'level': 'INFO',
         },
-        'firstapp': {
-            'handlers': ['console'],
+        'rndapp': {
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': True,
         },
-        'rndapp': {
+        'hw1app': {
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': True,
@@ -79,8 +79,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'firstapp',
     'rndapp',
+    'hw1app',
 ]
 
 MIDDLEWARE = [
