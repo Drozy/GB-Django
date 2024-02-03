@@ -69,6 +69,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'articlesapp': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
     },
 }
 
@@ -81,6 +86,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rndapp',
     'hw1app',
+    'articlesapp',
 ]
 
 MIDDLEWARE = [
