@@ -9,7 +9,7 @@ class Command(BaseCommand):
     help = "Generate fake authors and articles."
 
     def add_arguments(self, parser):
-        parser.add_argument('count', type=int, help='User ID')
+        parser.add_argument('count', type=int, help='Count of authors and articles for each author.')
 
     def handle(self, *args, **kwargs):
         count = kwargs.get('count')
