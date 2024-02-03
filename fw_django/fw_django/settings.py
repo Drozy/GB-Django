@@ -74,6 +74,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'shopapp': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
     },
 }
 
@@ -87,6 +92,7 @@ INSTALLED_APPS = [
     'rndapp',
     'hw1app',
     'articlesapp',
+    'shopapp',
 ]
 
 MIDDLEWARE = [
