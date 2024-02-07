@@ -1,12 +1,9 @@
-from django.http import HttpResponse
-
-from hw1app.variables import index_data, about_data
+from django.shortcuts import render
 
 
-# Create your views here.
 def index(request):
-    return HttpResponse(index_data)
+    return render(request, 'hw1app/index.html')
 
 
 def about(request):
-    return HttpResponse(about_data)
+    return render(request, 'hw1app/about.html')
