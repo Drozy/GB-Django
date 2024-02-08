@@ -59,7 +59,7 @@ class ArticleModel(models.Model):
     publication_flag = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Title: {self.title}'
+        return f'{self.title}'
 
     def get_summary(self):
         words = str(self.content).split()

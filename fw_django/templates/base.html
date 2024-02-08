@@ -8,8 +8,10 @@
     <title>>{% block title %}Title{% endblock %}</title>
 </head>
 <body>
-    {% block content %}
+    <div class="container">
+        {% block content %}
         <p>Базовый шаблон></p>
-    {% endblock %}
+        {% endblock %}
+    </div>
 </body>
 </html>

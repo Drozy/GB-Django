@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Get luck{% endblock %}
+{% block content %}
+    <h2>{{ game }}</h2>
+    <hr>
+    {% for res in results %}
+        <p>{{ res }}</p>
+    {% endfor %}
+{% endblock %}
