@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
-from articlesapp.models import AuthorModel, ArticleModel, CommentModel
+from articlesapp.models import AuthorModel, ArticleModel
 
 
 def author_posts(request, author_id):
@@ -12,4 +12,6 @@ def author_posts(request, author_id):
 
 def article_full(request, article_id):
     article = get_object_or_404(ArticleModel, pk=article_id)
+    article.views_count += 1
+    article.save()
     return render(request, 'articlesapp/article.html', {'article': article})

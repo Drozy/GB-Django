@@ -3,4 +3,7 @@
 {% block content %}
 <h3>{{ article }}</h3>
 <p>{{ article.content }}</p>
+<p>Дата публикации: {{ article.publication_date }}</p>
+<p>Категория: {{ article.category }}</p>
+<p>Количество просмотров: {{ article.views_count }}</p>
 {% endblock %}

@@ -5,7 +5,7 @@
     <hr>
     {% for article in articles %}
         {% if article.publication_flag %}
-            <p><a href="/blog/article/{{ article.pk }}">{{ article }}</a></p>
+            <p><a href="{{ article.get_absolute_url }}">{{ article }}</a></p>
         {% else %}}
             <p>{{ article }}</p>
         {% endif %}
