@@ -47,7 +47,7 @@ class AuthorModel(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'Name: {self.fullname}, email: {self.email}'
+        return f'{self.fullname}'
 
 
 class ArticleModel(models.Model):

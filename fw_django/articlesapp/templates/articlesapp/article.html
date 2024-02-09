@@ -1,9 +1,27 @@
 {% extends 'base.html' %}
 {% block title %}{{ article }}{% endblock %}
 {% block content %}
-<h3>{{ article }}</h3>
-<p>{{ article.content }}</p>
-<p>Дата публикации: {{ article.publication_date }}</p>
-<p>Категория: {{ article.category }}</p>
-<p>Количество просмотров: {{ article.views_count }}</p>
+    <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">{{ article }}</h3>
+          <p class="card-text">{{ article.content }}</p>
+          <p class="card-text"><small class="text-muted">Категория: {{ article.category }}</small></p>
+          <p class="card-text"><small class="text-muted">Дата публикации: {{ article.publication_date }}</small></p>
+          <p class="card-text"><small class="text-muted">Количество просмотров: {{ article.views_count }}</small></p>
+        </div>
+    </div>
+    <h3>Комментарии</h3>
+    {% for comment in comments %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ comment.author }}</h5>
+                <p class="card-text">{{ comment.text }}</p>
+                {% if comment.changed_date == comment.publication_date %}
+                <p class="card-text"><small class="text-muted">{{ article.publication_date }}</small></p>
+                {% else %}
+                <p class="card-text"><small class="text-muted">Изменен {{ article.changed_date }}</small></p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
