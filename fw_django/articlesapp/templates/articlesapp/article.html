@@ -11,17 +11,19 @@
         </div>
     </div>
     <h3>Комментарии</h3>
+    <ul class="list-group">
     {% for comment in comments %}
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{ comment.author }}</h5>
-                <p class="card-text">{{ comment.text }}</p>
+        <li class="list-group-item">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ comment.author }}</h5>
                 {% if comment.changed_date == comment.publication_date %}
-                <p class="card-text"><small class="text-muted">{{ article.publication_date }}</small></p>
+                <small class="text-muted">{{ article.publication_date }}</small>
                 {% else %}
-                <p class="card-text"><small class="text-muted">Изменен {{ article.changed_date }}</small></p>
+                <small class="text-muted">Изменен {{ article.changed_date }}</small>
                 {% endif %}
             </div>
-        </div>
+            <p class="mb-1">{{ comment.text }}</p>
+        </li>
     {% endfor %}
+    </ul>
 {% endblock %}
