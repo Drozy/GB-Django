@@ -23,7 +23,7 @@ class Command(BaseCommand):
             for j in range(1, count + 1):
                 article = ArticleModel(title=f'Title{j}',
                                        content=f'Text from {author.fullname} # {j}\n{lorem_ipsum.paragraph()}',
-                                       author=author, category=f'Category {i}')
+                                       author=author, category=f'Category {i}', publication_flag=True)
                 articles.append(article)
                 article.save()
         for article in articles:

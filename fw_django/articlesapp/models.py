@@ -31,6 +31,7 @@
 ○ дата изменения
 """
 from django.db import models
+from django.urls import reverse
 
 
 class AuthorModel(models.Model):
@@ -46,7 +47,7 @@ class AuthorModel(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'Name: {self.fullname}, email: {self.email}'
+        return f'{self.fullname}'
 
 
 class ArticleModel(models.Model):
@@ -58,8 +59,11 @@ class ArticleModel(models.Model):
     views_count = models.IntegerField(default=0)
     publication_flag = models.BooleanField(default=False)
 
+    def get_absolute_url(self):
+        return reverse('article_full', kwargs={'article_id': self.pk})
+
     def __str__(self):
-        return f'Title: {self.title}'
+        return f'{self.title}'
 
     def get_summary(self):
         words = str(self.content).split()

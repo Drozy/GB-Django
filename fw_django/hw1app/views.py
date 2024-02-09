@@ -1,12 +1,10 @@
-from django.http import HttpResponse
-
+from django.shortcuts import render
 from hw1app.variables import index_data, about_data
 
 
-# Create your views here.
 def index(request):
-    return HttpResponse(index_data)
+    return render(request, 'hw1app/base.html', {'title': 'Main page', 'content': index_data})
 
 
 def about(request):
-    return HttpResponse(about_data)
+    return render(request, 'hw1app/base.html', {'title': 'About', 'content': about_data})

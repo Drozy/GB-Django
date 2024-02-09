@@ -1,6 +1,7 @@
 import logging
 from random import randint, choice
-from django.http import HttpResponse
+from django.shortcuts import render
+from django.views.generic import TemplateView
 
 logger = logging.getLogger(__name__)
 
@@ -10,21 +11,23 @@ def log(view):
         res = view(request, *args, **kwargs)
         logger.info(f'Function {view.__name__} returned "{res.content.decode("utf-8")}"')
         return res
+
     return wrapper
 
 
-# Create your views here.
-
 @log
-def coin(request):
-    return HttpResponse(f"Выпало {choice(['Орел', 'Решка'])}")
-
-
-@log
-def dice(request):
-    return HttpResponse(f"Выпало {randint(1, 6)}")
+def coin(request, count=1):
+    results = [choice(['Орел', 'Решка']) for _ in range(count)]
+    return render(request, 'rndapp/roll.html', {'game': 'Heads and tails', 'results': results})
 
 
 @log
-def rnd_num(request):
-    return HttpResponse(f"Выпало {randint(1, 100)}")
+def dice(request, count=1):
+    results = [f'Выпало {randint(1, 7)}' for _ in range(count)]
+    return render(request, 'rndapp/roll.html', {'game': 'Dice roll', 'results': results})
+
+
+@log
+def rnd_num(request, count=1):
+    results = [f'Выпало {randint(1, 100)}' for _ in range(count)]
+    return render(request, 'rndapp/roll.html', {'game': 'Random number [1:100]', 'results': results})
