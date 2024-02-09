@@ -22,4 +22,5 @@ urlpatterns = [
     path('rnd/', include('rndapp.urls')),
     path('', include('hw1app.urls')),
     path('blog/', include('articlesapp.urls')),
+    path('shop/', include('shopapp.urls')),
 ]
