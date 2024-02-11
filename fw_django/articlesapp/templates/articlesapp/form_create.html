@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} Blog {% endblock %}
+{% block content %}
+<h3>{{ title }}</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+{% if message != '' %}
+<div class="card text-bg-success mb-3" style="max-width: 18rem; margin-top: 1em;">
+    <div class="card-body">
+        <p class="card-text">{{ message }}</p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
