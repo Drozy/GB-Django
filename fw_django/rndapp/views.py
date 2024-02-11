@@ -1,7 +1,7 @@
 import logging
 from random import randint, choice
-from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.shortcuts import render, redirect
+from .forms import GameForm
 
 logger = logging.getLogger(__name__)
 
@@ -31,3 +31,20 @@ def dice(request, count=1):
 def rnd_num(request, count=1):
     results = [f'Выпало {randint(1, 100)}' for _ in range(count)]
     return render(request, 'rndapp/roll.html', {'game': 'Random number [1:100]', 'results': results})
+
+
+def game_choice(request):
+    if request.method == 'POST':
+        form = GameForm(request.POST)
+        if form.is_valid():
+            game = form.cleaned_data['game']
+            attempts = form.cleaned_data['attempts']
+            if game == 'coin':
+                return redirect(coin, count=attempts)
+            if game == 'dice':
+                return redirect(dice, count=attempts)
+            if game == 'rnd_num':
+                return redirect(rnd_num, count=attempts)
+    else:
+        form = GameForm()
+    return render(request, 'rndapp/game_choice.html', {'form': form})
