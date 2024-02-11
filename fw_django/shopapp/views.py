@@ -1,8 +1,9 @@
 from datetime import date, timedelta
-from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import TemplateView, FormView
 
-from shopapp.models import Client, Product, Order, OrderItem
+from shopapp.forms import ProductForm
+from shopapp.models import Client, Product, Order
 
 
 class ClientOrders(TemplateView):
@@ -41,3 +42,27 @@ class OrderedProducts(TemplateView):
         context['products_for_month'] = products_for_month
         context['products_for_year'] = products_for_year
         return context
+
+
+class ProductView(TemplateView):
+    template_name = "shopapp/product.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = get_object_or_404(Product, pk=context['product_id'])
+        context['product'] = product
+        return context
+
+
+class ProductAdd(FormView):
+    template_name = "shopapp/add_product.html"
+    form_class = ProductForm
+    # success_url = '.'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def form_valid(self, form):
+        return redirect(form.save().get_absolute_url())
+
