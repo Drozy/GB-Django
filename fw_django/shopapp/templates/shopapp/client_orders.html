@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Client's orders{% endblock %}
+{% block content %}
+<h3>{{ client }}</h3>
+<hr>
+{% for order in orders %}
+<div class="card">
+    <div class="card-body justify-content-between">
+        <h3 class="card-title">{{ order }}</h3>
+        <small class="text-muted">{{ order.created }}</small>
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>{{ item.product }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.get_cost }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="2"><b>Total cost:</b></td>
+                <td>{{ order.get_total_cost }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% empty %}
+<p>Заказов не найдено</p>
+{% endfor %}
+{% endblock %}
