@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
-from articlesapp.forms import AuthorForm, ArticleForm
+from articlesapp.forms import AuthorForm, ArticleForm, CommentForm
 from articlesapp.models import AuthorModel, ArticleModel, CommentModel
 
 form_create = 'articlesapp/form_create.html'
+
 
 def author_posts(request, author_id):
     author = get_object_or_404(AuthorModel, pk=author_id)
@@ -16,8 +17,19 @@ def article_full(request, article_id):
     article = get_object_or_404(ArticleModel, pk=article_id)
     article.views_count += 1
     article.save()
-    comments = CommentModel.objects.filter(article=article).order_by('changed_date')
-    return render(request, 'articlesapp/article.html', {'article': article, 'comments': comments})
+    comments = CommentModel.objects.filter(article=article).order_by('-changed_date')
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            CommentModel.objects.create(
+                author=data['author'],
+                article=article,
+                text=data['text'],
+            )
+            return redirect(article_full, article_id)
+    return render(request, 'articlesapp/article.html',
+                  {'article': article, 'form': CommentForm(), 'comments': comments})
 
 
 def create_author(request):

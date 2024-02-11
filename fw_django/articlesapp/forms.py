@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import AuthorModel, ArticleModel
+from .models import AuthorModel, ArticleModel, CommentModel
 
 
 class AuthorForm(forms.ModelForm):
@@ -21,3 +21,8 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = ArticleModel
         fields = ['title', 'content', 'author', 'category', 'publication_flag']
+
+
+class CommentForm(forms.Form):
+    author = forms.ModelChoiceField(queryset=AuthorModel.objects.all())
+    text = forms.CharField(widget=forms.Textarea(attrs={'rows': 3, 'cols': 100}))
