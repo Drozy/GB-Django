@@ -25,7 +25,7 @@ urlpatterns = [
     path('', include('hw1app.urls')),
     path('blog/', include('articlesapp.urls')),
     path('shop/', include('shopapp.urls')),
-    path('__debug__', include('debug_toolbar.urls')),
+    # path('__debug__', include('debug_toolbar.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
