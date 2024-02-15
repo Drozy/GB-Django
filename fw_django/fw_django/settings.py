@@ -29,6 +29,10 @@ ALLOWED_HOSTS = [
     '192.168.111.62',
 ]
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
 # Application definition
 LOGGING = {
     'version': 1,
@@ -93,9 +97,11 @@ INSTALLED_APPS = [
     'hw1app',
     'articlesapp',
     'shopapp',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
