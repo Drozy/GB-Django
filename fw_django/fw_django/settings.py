@@ -27,6 +27,9 @@ DEBUG = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
+CSRF_TRUSTED_ORIGINS = ['http://drozy.pythonanywhere.com']
+
+
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'drozy.pythonanywhere.com',
